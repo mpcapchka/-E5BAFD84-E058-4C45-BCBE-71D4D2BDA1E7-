@@ -1,0 +1,25 @@
+﻿<Window x:Class="RadTreeViewBehavior.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RadTreeViewBehavior"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <telerik:RadTreeView ItemsSource="{Binding Projects, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                             Edited="RadTreeView_Edited"
+                             IsEditable="True">
+            <telerik:RadTreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type local:ProjectItem}"
+                                          ItemsSource="{Binding Files, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBlock Text="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type local:FileItem}">
+                    <TextBlock Text="{Binding Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DataTemplate>
+            </telerik:RadTreeView.Resources>
+        </telerik:RadTreeView>
+    </Grid>
+</Window>
